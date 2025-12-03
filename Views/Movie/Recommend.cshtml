@@ -1,0 +1,52 @@
+﻿@model Mocan_Melisa_Lab6_Master.Models.MovieRatingData
+
+@{
+    ViewData["Title"] = "Movie Recommendation";
+}
+
+<h2 class="mb-4">Movie Recommendation System</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-5">
+
+        <form asp-controller="Movie" asp-action="Recommend" method="get">
+
+            <div class="form-group">
+                <label>User ID</label>
+                <input name="userId" class="form-control" type="number" step="1" required />
+            </div>
+
+            <div class="form-group mt-3">
+                <label>Movie ID</label>
+                <input name="movieId" class="form-control" type="number" step="1" required />
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Recommend</button>
+        </form>
+    </div>
+
+    @if (ViewBag.Score != null)
+    {
+        <div class="col-md-6 offset-md-1 mt-4">
+
+            <h3>Result</h3>
+            <p><strong>User ID:</strong> @ViewBag.UserId</p>
+            <p><strong>Movie ID:</strong> @ViewBag.MovieId</p>
+            <p><strong>Predicted score:</strong> @ViewBag.Score</p>
+
+            @if (ViewBag.Score > 3.5)
+            {
+                <div class="alert alert-success mt-3">
+                    ✔ Filmul este <strong>RECOMANDAT</strong>!
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger mt-3">
+                    ✖ Filmul <strong>NU</strong> este recomandat.
+                </div>
+            }
+        </div>
+    }
+</div>
